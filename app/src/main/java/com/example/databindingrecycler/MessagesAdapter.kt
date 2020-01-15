@@ -4,19 +4,26 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.databindingrecycler.databinding.ItemBinding
+
 
 class MessagesAdapter(private val context: Context): RecyclerView.Adapter<MessagesAdapter.MessagesViewHolder>() {
 
     private val items: MutableList<MessageItem> = mutableListOf()
 
     fun addItems(items: List<MessageItem>){
+
+        val diffResult = DiffUtil.calculateDiff(DiffUtilsCallback(this.items, items))
+
         this.items.apply {
             clear()
             addAll(items)
         }
-        notifyDataSetChanged()
+
+        diffResult.dispatchUpdatesTo(this)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessagesViewHolder {
