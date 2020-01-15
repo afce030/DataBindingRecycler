@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.databindingrecycler.databinding.FragmentMainBinding
+import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_main.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -35,6 +36,13 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProviders.of(this)[MainViewModel::class.java]
         bindingUtil.mainViewModel = viewModel
 
+        setupBindings(bindingUtil)
+
+        return view
+    }
+
+    private fun setupBindings(bindingUtil: FragmentMainBinding){
+
         recycler = bindingUtil.rvMessages
         adapterM = MessagesAdapter(context!!)
         recycler.apply{
@@ -42,7 +50,10 @@ class MainFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
 
-        return view
+        bindingUtil.root.btn_changeData.setOnClickListener {
+            viewModel.changeData()
+        }
+
     }
 
 }

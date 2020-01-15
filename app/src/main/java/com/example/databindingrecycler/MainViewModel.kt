@@ -13,4 +13,22 @@ class MainViewModel: ViewModel() {
         )
     }
 
+    fun changeData(){
+
+        deleteData()
+
+        items.apply { value = listOf(
+                MessageItem("title1","txt${(1..200).random()}"),
+                MessageItem("title2","txt${(1..200).random()}"),
+                MessageItem("title3","txt${(1..200).random()}"),
+                MessageItem("title4","txt${(1..200).random()}")
+            )
+        }
+
+    }
+
+    private fun deleteData() {
+        items.apply { value = listOf() }
+    }
+
 }

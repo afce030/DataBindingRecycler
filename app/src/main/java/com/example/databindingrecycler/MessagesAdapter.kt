@@ -12,7 +12,10 @@ class MessagesAdapter(private val context: Context): RecyclerView.Adapter<Messag
     private val items: MutableList<MessageItem> = mutableListOf()
 
     fun addItems(items: List<MessageItem>){
-        this.items.addAll(items)
+        this.items.apply {
+            clear()
+            addAll(items)
+        }
         notifyDataSetChanged()
     }
 
