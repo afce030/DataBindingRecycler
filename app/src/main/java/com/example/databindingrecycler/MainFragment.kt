@@ -54,6 +54,10 @@ class MainFragment : Fragment() {
             viewModel.changeData()
         }
 
+        bindingUtil.root.btn_addData.setOnClickListener {
+            viewModel.requestToAddData()
+        }
+
     }
 
 }
