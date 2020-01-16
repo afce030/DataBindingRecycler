@@ -17,7 +17,7 @@ class MessagesAdapter(private val context: Context): RecyclerView.Adapter<Messag
 
         val diffResult = DiffUtil.calculateDiff(DiffUtilsCallback(this.items, items))
 
-        this.items.apply {
+        this.items.run {
             clear()
             addAll(items)
         }
